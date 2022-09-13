@@ -41,6 +41,17 @@ Simple useful commands to run against Azure
 
 ### Monitor
 
+#### Log Analytics
+
+[reference](https://docs.microsoft.com/en-us/cli/azure/monitor/log-analytics)
+
+1. Find the Log Analytics Workspace ID you want to query
+2. Run a specific query:
+
+```shell
+az monitor log-analytics query -w 7893d280-08de-4763-a795-b36f4432fddd --analytics-query "AppTraces | where TimeGenerated > ago(10m) "
+```
+
 #### Application Insights
 
 1. Find the (Application Insights) app attached to the resource you are interested in. 

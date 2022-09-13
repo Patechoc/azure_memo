@@ -1,6 +1,7 @@
 # azure_memo
 Simple useful commands to run against Azure 
 
+- [Reference list of Azure services](https://docs.microsoft.com/en-us/cli/azure/azure-services-the-azure-cli-can-manage)
 
 ## Installation tricks
 
@@ -21,3 +22,17 @@ Simple useful commands to run against Azure
 ### Switch subscription
 
 `az account set --subscription <name or id>`
+
+## Management and Governance
+
+### (Resource) Groups
+
+#### List resource groups
+
+`az group list -o table`
+
+## Compute
+
+### Function Apps
+
+- List all FunctionApps: `az functionapp list -o table`

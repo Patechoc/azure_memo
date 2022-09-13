@@ -50,6 +50,8 @@ Simple useful commands to run against Azure
 
 ```shell
 az monitor log-analytics query -w 7893d280-08de-4763-a795-b36f4432fddd --analytics-query "AppTraces | where TimeGenerated > ago(10m) "
+az monitor log-analytics query -w 7893d280-08de-4763-a795-b36f4432fddd --analytics-query "AppTraces | where TimeGenerated > ago(10m)  | where OperationName == 'func_nasa_hdl_ingestion' "
+az monitor log-analytics query -w 7893d280-08de-4763-a795-b36f4432fddd --analytics-query "AppTraces | where TimeGenerated > ago(10m)  | where OperationName != 'func_nasa_hdl_ingestion' "
 ```
 
 #### Application Insights

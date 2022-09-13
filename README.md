@@ -8,7 +8,7 @@ Simple useful commands to run against Azure
 
 `pip install pip-system-certs`
 
-## Login to Azure & 
+## Login to Azure & switch subscription
 
 ### Log in
 
@@ -20,4 +20,4 @@ Simple useful commands to run against Azure
 
 ### Switch subscription
 
-az account set --subscription <name or id>
+`az account set --subscription <name or id>`

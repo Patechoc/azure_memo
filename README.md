@@ -36,3 +36,59 @@ Simple useful commands to run against Azure
 ### Function Apps
 
 - List all FunctionApps: `az functionapp list -o table`
+
+## DevOps
+
+### Monitor
+
+#### Application Insights
+
+1. Find the (Application Insights) app attached to the resource you are interested in. 
+2. Click the `JSONview` and find the `AppID` of the app (something like `14f0953-ad40-42c5-b29d-debc616b215fd`)
+3. Search for the **metric** you are interested in among the huge list provided by `get-metadata`
+
+```shell
+(.venv) λ az monitor app-insights metrics get-metadata --app 14215fd3-ad40-42c5-b29d-def095bc616b | grep "requests"
+    "performanceCounters/requestsInQueue": {
+      "displayName": "ASP.NET requests in application queue",
+    "performanceCounters/requestsPerSecond": {
+    "requests/count": {
+      "displayName": "Server requests",
+    "requests/duration": {
+    "requests/failed": {
+      "displayName": "Failed requests",
+```
+
+4. show the metric's data on a given time interval ([very badly documented by Microsoft](https://docs.microsoft.com/en-us/cli/azure/monitor/app-insights/metrics?view=azure-cli-latest#az-monitor-app-insights-metrics-show))
+
+```shell
+(.venv) λ az monitor app-insights metrics show --app 14215fd3-ad40-42c5-b29d-def095bc616b --metric requests/count --start-time 2022-09-12 --end-time 2022-09-13
+{
+  "value": {
+    "end": "2022-09-12T22:00:00+00:00",
+    "interval": null,
+    "requests/count": {
+      "sum": 280
+    },
+    "segments": null,
+    "start": "2022-09-11T22:00:00+00:00"
+  }
+}
+```
+
+```shell
+(.venv) λ az monitor app-insights metrics show --app 14215fd3-ad40-42c5-b29d-def095bc616b --metric requests/count --start-time 2022-09-12 01:00:00 --end-time 2022-09-12 02:00:00
+{
+  "value": {
+    "end": "2022-09-12T00:00:00+00:00",
+    "interval": null,
+    "requests/count": {
+      "sum": 12
+    },
+    "segments": null,
+    "start": "2022-09-11T23:00:00+00:00"
+  }
+}
+```
+
+### Pipelines
